@@ -12,9 +12,6 @@ interface IERC721Receiver {
 }
 
 contract KrauseTickets is ERC1155, IERC721Receiver {
-    error FailedToBurn(string tokenType, uint256 tokenId);
-    error NotApproved(string tokenType, uint256 tokenId);
-
     event Exchanged(
         address exchanger,
         uint256 legacyTokenId,
@@ -58,6 +55,7 @@ contract KrauseTickets is ERC1155, IERC721Receiver {
         }
     }
 
+    /// @notice Callback for receiving an ERC721 mints a ticket if the token was a legacy NFT
     function onERC721Received(
         address,
         address from,
@@ -78,15 +76,21 @@ contract KrauseTickets is ERC1155, IERC721Receiver {
         return this.onERC721Received.selector;
     }
 
-    function _exchangeUpperLevel(address from) internal {
-        _mint(from, upperLevelId, 1, "");
+    /// @notice Mint an upper level ticket for user
+    /// @param to The address to mint the ticket to
+    function _exchangeUpperLevel(address to) internal {
+        _mint(to, upperLevelId, 1, "");
     }
 
-    function _exchangeClubLevel(address from) internal {
-        _mint(from, clubLevelId, 1, "");
+    /// @notice Mint a club level ticket for user
+    /// @param to The address to mint the ticket to
+    function _exchangeClubLevel(address to) internal {
+        _mint(to, clubLevelId, 1, "");
     }
 
-    function _exchangeCourtside(address from) internal {
-        _mint(from, courtsideId, 1, "");
+    /// @notice Mint a courtside ticket for user
+    /// @param to The address to mint the ticket to
+    function _exchangeCourtside(address to) internal {
+        _mint(to, courtsideId, 1, "");
     }
 }
