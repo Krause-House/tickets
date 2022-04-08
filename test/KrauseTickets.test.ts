@@ -3,7 +3,11 @@ import { Contract, Signer } from "ethers";
 import { ethers, upgrades } from "hardhat";
 import { MirrorTickets } from "../typechain";
 
-const ticketsAbi = ["function setUri(string memory _uri) public"];
+const ticketsAbi = [
+  "function setUri(string memory _uri) public",
+  "function setRoyaltyInfo(address _royaltyReceiver, uint256 _royaltyFeeInBips) external",
+  "function supportsInterface(bytes4 interfaceID) public",
+];
 const legacyTicketsAbi = [
   "function approve(address spender, uint256 id) public",
   "function safeTransferFrom(address from,address to,uint256 tokenId) public",
@@ -66,6 +70,36 @@ describe("Exchange tickets", function () {
     await expect(
       givenKrauseTicketsContract(alice).setUri(uri)
     ).to.be.revertedWith("Ownable: caller is not the owner");
+  });
+
+  it("allows setting royalty info only if owner", async function () {
+    await krauseTickets.setRoyaltyInfo(await alice.getAddress(), 100); // 1% royalty
+    const { receiver, royaltyAmount } = await krauseTickets.royaltyInfo(
+      0,
+      100000
+    );
+    expect(receiver).to.equal(await alice.getAddress());
+    expect(royaltyAmount).to.equal(1000);
+  });
+
+  it("properly calculates royalties", async function () {
+    await krauseTickets.setRoyaltyInfo(await alice.getAddress(), 100);
+    expect(await krauseTickets.royaltyReceiver()).to.equal(
+      await alice.getAddress()
+    );
+    expect(await krauseTickets.royaltyFeeInBips()).to.equal(100);
+
+    // non-owner cannot set royalty info
+    await expect(
+      givenKrauseTicketsContract(alice).setRoyaltyInfo(
+        await alice.getAddress(),
+        10000
+      )
+    ).to.be.revertedWith("Ownable: caller is not the owner");
+  });
+
+  it("supports EIP2981", async function () {
+    expect(await krauseTickets.supportsInterface("0x2a55205a")).to.be.true;
   });
 });
 

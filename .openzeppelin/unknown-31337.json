@@ -2,29 +2,44 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0xce1917d32e70aba8a8d3c82fffbc8eec496b01d6c1d7f33a2abe6e67e7b814ec"
+    "txHash": "0x7cb54b1b16bbf1de7df3263174cae428a36846c211efd6bc2e25eb1d594613ec"
   },
   "proxies": [
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x3b318c3cbb027df1f4203a9b2a754b771c435e524f363079d67a32d08ed6250c",
+      "txHash": "0x13c4d23d78d012b4bc371d59ed65a5e83abbb55c2ed658a31b8ef7e91e9e48b0",
       "kind": "transparent"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x4361f6a5710b12e18241df4556d66e2c2ac2b7ae6a82b120139743d638516ff3",
+      "txHash": "0x62ed90127d5718fc50b1056ac2059d12682013c0acf005442923fe0b2e30a1d7",
       "kind": "transparent"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x5def61050fe93352e962ac58833e76964bdef0492454e79276af4a3cffa3f114",
+      "txHash": "0x7928365b66d06bb829bd5ab7f038dc49edad94b4132332b68bf6163ea8820b1c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
+      "txHash": "0x1eb36494ae84d93c4a11d52d7753df0a42c60ae2afbff4f710d8f4f669d62348",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+      "txHash": "0xc536c56730a5be284dd44778305d38ef68c593c78740381f49083560db2f097e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      "txHash": "0x7d3b268d1b84c318decd817cd490ec6adada3781673611ab5d7e2490d9076bef",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "60efde5f2a71b4ff6ce50335515f44df4fe80e08a7be844cdd0ecf626716afe4": {
+    "b950cc5f988f67cb030fecce5d35580bf5254a036d23788c5f6d3f06d152c874": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x0c8969d5634be1b4ca1c297c0998e218211c90e1c01f374e385adfa3c14a19e3",
+      "txHash": "0xdc91eb4f1105c2236f53bf6612759b5c6adfb5ee99f134c13719cce08ea97b2a",
       "layout": {
         "storage": [
           {
@@ -138,6 +153,22 @@
             "type": "t_address",
             "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:35"
+          },
+          {
+            "label": "royaltyFeeInBips",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_uint256",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:37"
+          },
+          {
+            "label": "royaltyReceiver",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:38"
           }
         ],
         "types": {
