@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 
 async function main() {
   const LegacyTicket = await ethers.getContractFactory("MirrorTicket");
@@ -27,11 +27,12 @@ async function main() {
   console.log("Courtside deployed to:", courtside.address);
 
   const V2Tickets = await ethers.getContractFactory("KrauseTickets");
-  const krauseTicketsContract = await V2Tickets.deploy(
+  const krauseTicketsContract = await upgrades.deployProxy(V2Tickets, [
     upperLevel.address,
     clubLevel.address,
-    courtside.address
-  );
+    courtside.address,
+    "",
+  ]);
   await krauseTicketsContract.deployed();
   console.log("KrauseTickets deployed to:", krauseTicketsContract.address);
 }
