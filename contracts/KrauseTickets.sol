@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity >=0.8.10;
-import {ERC1155} from "@rari-capital/solmate/src/tokens/ERC1155.sol";
+import {ERC1155Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
+import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 interface IERC721Receiver {
     function onERC721Received(
@@ -11,48 +12,53 @@ interface IERC721Receiver {
     ) external returns (bytes4);
 }
 
-contract KrauseTickets is ERC1155, IERC721Receiver {
+contract KrauseTickets is
+    ERC1155Upgradeable,
+    OwnableUpgradeable,
+    IERC721Receiver
+{
     event Exchanged(
         address exchanger,
         uint256 legacyTokenId,
         address legacyContract
     );
 
-    string public constant upperLevelUri =
-        "https://mirror-api.com/editions/custom/krause-house-crowdfund/1";
+    string private baseUri;
+
     uint256 public constant upperLevelId = 0;
-    address public immutable legacyUpperLevel;
+    address public legacyUpperLevel;
 
-    string public constant clubLevelUri =
-        "https://mirror-api.com/editions/crowdfunded/v3/metadata";
     uint256 public constant clubLevelId = 1;
-    address public immutable legacyClubLevel;
+    address public legacyClubLevel;
 
-    string public constant courtsideUri =
-        "https://mirror-api.com/editions/crowdfunded/v3/metadata";
     uint256 public constant courtsideId = 2;
-    address public immutable legacyCourtside;
+    address public legacyCourtside;
 
-    constructor(
+    function initialize(
         address _legacyUpperLevel,
         address _legacyClubLevel,
-        address _legacyCourtside
-    ) {
+        address _legacyCourtside,
+        string memory _uri
+    ) public initializer {
         legacyUpperLevel = _legacyUpperLevel;
         legacyClubLevel = _legacyClubLevel;
         legacyCourtside = _legacyCourtside;
+        baseUri = _uri;
+        __ERC1155_init("");
+        __Ownable_init();
     }
 
-    function uri(uint256 id) public pure override returns (string memory) {
-        if (id == upperLevelId) {
-            return upperLevelUri;
-        } else if (id == clubLevelId) {
-            return clubLevelUri;
-        } else if (id == courtsideId) {
-            return courtsideUri;
-        } else {
-            return "";
-        }
+    function getUri(string memory id) external view returns (string memory) {
+        return string(abi.encodePacked(baseUri, "/", id));
+    }
+
+    function uri(uint256) public pure override returns (string memory) {
+        require(false, "KrauseTickets: Unsupported method");
+        return "";
+    }
+
+    function setUri(string memory _uri) public onlyOwner {
+        baseUri = _uri;
     }
 
     /// @notice Callback for receiving an ERC721 mints a ticket if the token was a legacy NFT

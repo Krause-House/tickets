@@ -1,36 +1,36 @@
 import { expect } from "chai";
-import { Address } from "cluster";
 import { Contract, Signer } from "ethers";
-import { ethers } from "hardhat";
-import { KrauseTickets, MirrorTicket } from "../typechain";
+import { ethers, upgrades } from "hardhat";
+import { MirrorTickets } from "../typechain";
 
-const abi = [
-  "function exchange(uint256 legacyTokenId, uint256 newTokenId) public",
-];
+const ticketsAbi = ["function setUri(string memory _uri) public"];
 const legacyTicketsAbi = [
   "function approve(address spender, uint256 id) public",
   "function safeTransferFrom(address from,address to,uint256 tokenId) public",
 ];
 
 let legacyTickets: {
-  upperLevel: MirrorTicket;
-  clubLevel: MirrorTicket;
-  courtside: MirrorTicket;
+  upperLevel: MirrorTickets;
+  clubLevel: MirrorTickets;
+  courtside: MirrorTickets;
 };
 let upperLevelId: number, clubLevelId: number, courtsideId: number;
 let owner: Signer, alice: Signer, bob: Signer;
-let krauseTickets: KrauseTickets;
+let krauseTickets: Contract; // can't directly use type since its a proxy
+const uri = "https://mirror-api.com/editions/custom/krause-house-crowdfund";
 
 describe("Exchange tickets", function () {
   beforeEach(async function () {
     [owner, alice, bob] = await ethers.getSigners();
     legacyTickets = await deployLegacyTickets(await owner.getAddress());
+
     const KrauseTickets = await ethers.getContractFactory("KrauseTickets");
-    krauseTickets = await KrauseTickets.deploy(
+    krauseTickets = await upgrades.deployProxy(KrauseTickets, [
       legacyTickets.upperLevel.address,
       legacyTickets.clubLevel.address,
-      legacyTickets.courtside.address
-    );
+      legacyTickets.courtside.address,
+      uri,
+    ]);
 
     upperLevelId = await (await krauseTickets.upperLevelId()).toNumber();
     clubLevelId = await (await krauseTickets.clubLevelId()).toNumber();
@@ -44,6 +44,28 @@ describe("Exchange tickets", function () {
     await whenExchanging(alice, 1);
 
     assertExchanged(aliceAddress);
+  });
+
+  it("retrieves the correct uri for each token", async function () {
+    expect(await krauseTickets.getUri("0")).to.equal(uri + "/0");
+    expect(await krauseTickets.getUri("1")).to.equal(uri + "/1");
+    expect(await krauseTickets.getUri("2")).to.equal(uri + "/2");
+
+    // confirm the OZ implementation is disabled
+    await expect(krauseTickets.uri(0)).to.be.revertedWith(
+      "KrauseTickets: Unsupported method"
+    );
+  });
+
+  it("allows setting uri only if owner", async function () {
+    const newUri = "https://krause.com/new";
+    await krauseTickets.setUri(newUri);
+    expect(await krauseTickets.getUri("0")).to.equal(newUri + "/0");
+
+    // non-owner cannot set uri
+    await expect(
+      givenKrauseTicketsContract(alice).setUri(uri)
+    ).to.be.revertedWith("Ownable: caller is not the owner");
   });
 });
 
@@ -67,6 +89,10 @@ const givenCourtsideContract = (signer: Signer) => {
     legacyTicketsAbi,
     signer
   );
+};
+
+const givenKrauseTicketsContract = (signer: Signer) => {
+  return new ethers.Contract(krauseTickets.address, ticketsAbi, signer);
 };
 
 const givenLegacyTickets = async (accountAddress: string, tokenId: number) => {
@@ -97,7 +123,7 @@ const whenExchanging = async (signer: Signer, tokenId: number) => {
 };
 
 const deployLegacyTickets = async (owner: string) => {
-  const LegacyTicket = await ethers.getContractFactory("MirrorTicket");
+  const LegacyTicket = await ethers.getContractFactory("MirrorTickets");
   const upperLevel = await LegacyTicket.deploy(owner, "", "");
   const clubLevel = await LegacyTicket.deploy(owner, "", "");
   const courtside = await LegacyTicket.deploy(owner, "", "");

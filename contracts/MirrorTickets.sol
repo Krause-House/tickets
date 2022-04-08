@@ -94,7 +94,7 @@ contract Ownable is IOwnableEvents {
     }
 }
 
-contract MirrorTicket is ERC721, Ownable {
+contract MirrorTickets is ERC721, Ownable {
     string public name;
     string public symbol;
 
