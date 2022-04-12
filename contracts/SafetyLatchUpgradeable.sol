@@ -40,7 +40,7 @@ contract SafetyLatchUpgradeable is OwnableUpgradeable {
     }
 
     function withdrawErc20(address contractAddress) public onlyOwner {
-        uint256 balance = ERC20(contractAddress).balanceOf(msg.sender);
-        ERC20(contractAddress).transferFrom(address(this), msg.sender, balance);
+        uint256 balance = ERC20(contractAddress).balanceOf(address(this));
+        ERC20(contractAddress).transfer(msg.sender, balance);
     }
 }
