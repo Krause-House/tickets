@@ -60,6 +60,7 @@ contract KrauseTickets is
         symbol = "KH";
         __ERC1155_init("");
         __Ownable_init();
+        __SafetyLatchUpgradeable_init();
     }
 
     /// @notice set name and symbol for contract
