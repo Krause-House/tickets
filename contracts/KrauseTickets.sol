@@ -30,6 +30,8 @@ contract KrauseTickets is
     );
 
     string private baseUri;
+    string public name;
+    string public symbol;
 
     uint256 public constant upperLevelId = 0;
     address public legacyUpperLevel;
@@ -54,8 +56,19 @@ contract KrauseTickets is
         legacyCourtside = _legacyCourtside;
         baseUri = _uri;
         royaltyReceiver = msg.sender;
+        name = "Krause House Ticket";
+        symbol = "KH";
         __ERC1155_init("");
         __Ownable_init();
+    }
+
+    /// @notice set name and symbol for contract
+    function setName(string memory _name, string memory _symbol)
+        public
+        onlyOwner
+    {
+        name = _name;
+        symbol = _symbol;
     }
 
     /// @notice Query if a contract implements an interface
