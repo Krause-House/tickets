@@ -11,7 +11,7 @@ contract SafetyLatchUpgradeable is OwnableUpgradeable {
         __Ownable_init();
     }
 
-    function withdrawErc721(address contractAddress, uint256 tokenId)
+    function withdrawERC721(address contractAddress, uint256 tokenId)
         public
         onlyOwner
     {
@@ -22,7 +22,7 @@ contract SafetyLatchUpgradeable is OwnableUpgradeable {
         );
     }
 
-    function withdrawErc1155(address contractAddress, uint256 tokenId)
+    function withdrawERC1155(address contractAddress, uint256 tokenId)
         public
         onlyOwner
     {
@@ -39,7 +39,7 @@ contract SafetyLatchUpgradeable is OwnableUpgradeable {
         );
     }
 
-    function withdrawErc20(address contractAddress) public onlyOwner {
+    function withdrawERC20(address contractAddress) public onlyOwner {
         uint256 balance = ERC20(contractAddress).balanceOf(address(this));
         ERC20(contractAddress).transfer(msg.sender, balance);
     }
