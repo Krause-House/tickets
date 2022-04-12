@@ -2,6 +2,7 @@
 pragma solidity >=0.8.10;
 import {ERC1155Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 import {SafetyLatchUpgradeable} from "./SafetyLatchUpgradeable.sol";
 
@@ -20,6 +21,8 @@ contract KrauseTickets is
     SafetyLatchUpgradeable,
     IERC721Receiver
 {
+    using Strings for uint256;
+
     event Exchanged(
         address exchanger,
         uint256 legacyTokenId,
@@ -73,15 +76,13 @@ contract KrauseTickets is
     }
 
     /// @notice get uri based on token id
-    /// @param id token id to get uri for
-    function getUri(string memory id) external view returns (string memory) {
-        return string(abi.encodePacked(baseUri, "/", id));
-    }
-
-    /// @dev disables OpenSea's ERC1155 URI
-    function uri(uint256) public pure override returns (string memory) {
-        require(false, "KrauseTickets: Unsupported method");
-        return "";
+    /// @param tokenId token id to get uri for
+    function uri(uint256 tokenId) public view override returns (string memory) {
+        string memory _baseUri = baseUri;
+        return
+            bytes(_baseUri).length > 0
+                ? string(abi.encodePacked(_baseUri, tokenId.toString()))
+                : "";
     }
 
     /// @notice set base uri for all tokens

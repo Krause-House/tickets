@@ -21,7 +21,7 @@ let legacyTickets: {
 let upperLevelId: number, clubLevelId: number, courtsideId: number;
 let owner: Signer, alice: Signer, bob: Signer;
 let krauseTickets: Contract; // can't directly use type since its a proxy
-const uri = "https://mirror-api.com/editions/custom/krause-house-crowdfund";
+const uri = "https://mirror-api.com/editions/custom/krause-house-crowdfund/";
 
 describe("Exchange tickets", function () {
   beforeEach(async function () {
@@ -51,20 +51,15 @@ describe("Exchange tickets", function () {
   });
 
   it("retrieves the correct uri for each token", async function () {
-    expect(await krauseTickets.getUri("0")).to.equal(uri + "/0");
-    expect(await krauseTickets.getUri("1")).to.equal(uri + "/1");
-    expect(await krauseTickets.getUri("2")).to.equal(uri + "/2");
-
-    // confirm the OZ implementation is disabled
-    await expect(krauseTickets.uri(0)).to.be.revertedWith(
-      "KrauseTickets: Unsupported method"
-    );
+    expect(await krauseTickets.uri("0")).to.equal(uri + "0");
+    expect(await krauseTickets.uri("1")).to.equal(uri + "1");
+    expect(await krauseTickets.uri("2")).to.equal(uri + "2");
   });
 
   it("allows setting uri only if owner", async function () {
     const newUri = "https://krause.com/new";
     await krauseTickets.setUri(newUri);
-    expect(await krauseTickets.getUri("0")).to.equal(newUri + "/0");
+    expect(await krauseTickets.uri("0")).to.equal(newUri + "0");
 
     // non-owner cannot set uri
     await expect(
