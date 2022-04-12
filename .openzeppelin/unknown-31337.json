@@ -2,44 +2,49 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0x7cb54b1b16bbf1de7df3263174cae428a36846c211efd6bc2e25eb1d594613ec"
+    "txHash": "0xb6b28c2aae7951e340f82468b4a44d854ba52bd374b395a22009673bf977a9bb"
   },
   "proxies": [
     {
+      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "txHash": "0xea2447c2408fb0359e58594900db1184b3b336ee8863c49c741d5a84f97ce2d0",
+      "kind": "transparent"
+    },
+    {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x13c4d23d78d012b4bc371d59ed65a5e83abbb55c2ed658a31b8ef7e91e9e48b0",
+      "txHash": "0x8ce76861238e42f9cac35048cfd8abc57a4669023e35a09964f254a4aa4569c2",
       "kind": "transparent"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x62ed90127d5718fc50b1056ac2059d12682013c0acf005442923fe0b2e30a1d7",
+      "txHash": "0x02ee45f20e0f52a0700b961c786090e37b9f714954d0fe790e083aa942254f29",
       "kind": "transparent"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x7928365b66d06bb829bd5ab7f038dc49edad94b4132332b68bf6163ea8820b1c",
+      "txHash": "0x5e9e8c4bd0fc102a3585178c44bd6d331b7ca3a67033575a268850cc065d7424",
       "kind": "transparent"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0x1eb36494ae84d93c4a11d52d7753df0a42c60ae2afbff4f710d8f4f669d62348",
+      "txHash": "0x643c242b8bd34f681fbcd5e149e5578f2b24491661936ff7a9b38ce05dfbdbf2",
       "kind": "transparent"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0xc536c56730a5be284dd44778305d38ef68c593c78740381f49083560db2f097e",
+      "txHash": "0x6a79ca9dc1eb8bd1d0de96f8068115d11b752839bb17e3569f1c8b6c96976849",
       "kind": "transparent"
     },
     {
       "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
-      "txHash": "0x7d3b268d1b84c318decd817cd490ec6adada3781673611ab5d7e2490d9076bef",
+      "txHash": "0xb5548be423a01e6b5429fefc9620449a19c0e239eab093dc53f749fd25305ebe",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "b950cc5f988f67cb030fecce5d35580bf5254a036d23788c5f6d3f06d152c874": {
+    "4bdf2f61b8a8d5a63c9bb0d213a22c511d104d39456793f486e276f5024045b3": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0xdc91eb4f1105c2236f53bf6612759b5c6adfb5ee99f134c13719cce08ea97b2a",
+      "txHash": "0x18c01502cd194d5be9b4ecd9eb1a283c1b5b6dd493a586e612409575326742a5",
       "layout": {
         "storage": [
           {
@@ -128,7 +133,7 @@
             "slot": "201",
             "type": "t_string_storage",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:26"
+            "src": "contracts/KrauseTickets.sol:29"
           },
           {
             "label": "legacyUpperLevel",
@@ -136,7 +141,7 @@
             "slot": "202",
             "type": "t_address",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:29"
+            "src": "contracts/KrauseTickets.sol:32"
           },
           {
             "label": "legacyClubLevel",
@@ -144,7 +149,7 @@
             "slot": "203",
             "type": "t_address",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:32"
+            "src": "contracts/KrauseTickets.sol:35"
           },
           {
             "label": "legacyCourtside",
@@ -152,7 +157,7 @@
             "slot": "204",
             "type": "t_address",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:35"
+            "src": "contracts/KrauseTickets.sol:38"
           },
           {
             "label": "royaltyFeeInBips",
@@ -160,7 +165,7 @@
             "slot": "205",
             "type": "t_uint256",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:37"
+            "src": "contracts/KrauseTickets.sol:40"
           },
           {
             "label": "royaltyReceiver",
@@ -168,7 +173,7 @@
             "slot": "206",
             "type": "t_address",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:38"
+            "src": "contracts/KrauseTickets.sol:41"
           }
         ],
         "types": {
