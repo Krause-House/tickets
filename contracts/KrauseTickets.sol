@@ -30,6 +30,7 @@ contract KrauseTickets is
     );
 
     string private baseUri;
+    string public contractURI;
     string public name;
     string public symbol;
 
@@ -97,6 +98,11 @@ contract KrauseTickets is
             bytes(_baseUri).length > 0
                 ? string(abi.encodePacked(_baseUri, tokenId.toString()))
                 : "";
+    }
+
+    /// @notice for OpenSea royalty compatibility
+    function setContractURI(string memory _uri) public onlyOwner {
+        contractURI = _uri;
     }
 
     /// @notice set base uri for all tokens
