@@ -1,6 +1,7 @@
 import { expect } from "chai";
-import { Contract, Signer } from "ethers";
+import { Signer } from "ethers";
 import { ethers } from "hardhat";
+import { SafetyLatchUpgradeable } from "../typechain";
 
 const safetyLatchUpgradeableAbi = [
   "function withdrawERC721(address contractAddress, uint256 tokenId) public",
@@ -9,7 +10,7 @@ const safetyLatchUpgradeableAbi = [
 ];
 
 let owner: Signer, alice: Signer, bob: Signer;
-let safetyLatchUpgradeable: Contract; // can't directly use type since its a proxy
+let safetyLatchUpgradeable: SafetyLatchUpgradeable;
 
 describe("Safety latch", function () {
   beforeEach(async function () {
