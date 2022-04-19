@@ -2,7 +2,7 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0x47dc34cec02a91d0733225508c9cd156c73694a8d044c88d96bde40b86c3e6bf"
+    "txHash": "0x631e691c8074a7f486f282656d54b75959e5829726e0e029c82fec8c73095ef0"
   },
   "proxies": [
     {
@@ -11,40 +11,45 @@
       "kind": "transparent"
     },
     {
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0x583c764de3e4e7a3d5fd6286a89c7df35ac3f8921ef312e01b3c2efd8f01ec0f",
+      "kind": "transparent"
+    },
+    {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0xfce4290307a513ba684b84247602aadbdaf982f7d7c07f860b98235f281663a0",
+      "txHash": "0x08f8f0366eb26d96b3c52ef9256b6485fca1b4efb6edb4b2eefeb8f0d34cf7c1",
       "kind": "transparent"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x9d9216205ebba85de6f7d670522666892db24fb84f406b98f8d4d9b780842b29",
+      "txHash": "0x4300a8d475a6b218642970ef57b705b436abc0cfdbd3c65fe51248e709e1d07f",
       "kind": "transparent"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x0b7e95a0fe3950a9246c706b0171f071bd4ddf9362043b8957286042d7e1a872",
+      "txHash": "0x841538b659fa914b9c926903e45e5eac8738aef48e7ab87bc04da8474cd1bbba",
       "kind": "transparent"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0x7c6d9815e2d31573ca9eb823ad568d31aef652fd22781293d89e3fa43690aac2",
+      "txHash": "0xda1aee04b33a726e8994f830bbd517eef0dd4a77f7c3d0e0bf160830f32bac4a",
       "kind": "transparent"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0x90cd30f901c639091829a0e411e814b62cee8e80e00bd7f517f6dcf137716247",
+      "txHash": "0x805bdee1baa348c4c4e2d316573c6d508ac402e2312aff7843151f34dd257410",
       "kind": "transparent"
     },
     {
       "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
-      "txHash": "0xed4a0eff71caf589427057ef17bb9da5678510863cb6cc459f88d0ef527a5b5f",
+      "txHash": "0x00dc02a03077708adb9d2170a52ed69ad3ecab4beea1984c9def831d918004b4",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "72d1e7655664ecf093b774a73d7692ba2af7f4dedd1854d744848fe0f41a3634": {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0xec52f21d708e7607721c7958bf288b79d6dd7ec4177e8df26fdbbb4b0665015a",
+    "3bff8fccbe7be0fa9abb68fa383f5f76eda941e5949c07831d752c7b137b6fe6": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "txHash": "0x20944a60677054b82a3f4d21a4e44a16f1ed23cc8b17fd54106b0bb77df2877f",
       "layout": {
         "storage": [
           {
@@ -133,47 +138,277 @@
             "slot": "201",
             "type": "t_string_storage",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:29"
-          },
-          {
-            "label": "legacyUpperLevel",
-            "offset": 0,
-            "slot": "202",
-            "type": "t_address",
-            "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:32"
           },
           {
-            "label": "legacyClubLevel",
+            "label": "contractURI",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:33"
+          },
+          {
+            "label": "name",
             "offset": 0,
             "slot": "203",
-            "type": "t_address",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:34"
+          },
+          {
+            "label": "symbol",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_string_storage",
             "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:35"
           },
           {
-            "label": "legacyCourtside",
+            "label": "legacyUpperLevel",
             "offset": 0,
-            "slot": "204",
+            "slot": "205",
             "type": "t_address",
             "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:38"
           },
           {
-            "label": "royaltyFeeInBips",
-            "offset": 0,
-            "slot": "205",
-            "type": "t_uint256",
-            "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:40"
-          },
-          {
-            "label": "royaltyReceiver",
+            "label": "legacyClubLevel",
             "offset": 0,
             "slot": "206",
             "type": "t_address",
             "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:41"
+          },
+          {
+            "label": "legacyCourtside",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:44"
+          },
+          {
+            "label": "royaltyFeeInBips",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_uint256",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:46"
+          },
+          {
+            "label": "royaltyReceiver",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:47"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]",
+            "numberOfBytes": "1504"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "b973063163c3a96b68a3194ce83d03e90e501c855eadb46e257cf8c904b27652": {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "txHash": "0x028164cb9abeb7153882001e15f096d6729bf6df9cd1a232626e7c29c4ad1624",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_balances",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:25"
+          },
+          {
+            "label": "_operatorApprovals",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:28"
+          },
+          {
+            "label": "_uri",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_string_storage",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:31"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_array(t_uint256)47_storage",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:475"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
+          },
+          {
+            "label": "baseUri",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:32"
+          },
+          {
+            "label": "contractURI",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:33"
+          },
+          {
+            "label": "name",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:34"
+          },
+          {
+            "label": "symbol",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:35"
+          },
+          {
+            "label": "legacyUpperLevel",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:38"
+          },
+          {
+            "label": "legacyClubLevel",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:41"
+          },
+          {
+            "label": "legacyCourtside",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:44"
+          },
+          {
+            "label": "royaltyFeeInBips",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_uint256",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:46"
+          },
+          {
+            "label": "royaltyReceiver",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:47"
           }
         ],
         "types": {

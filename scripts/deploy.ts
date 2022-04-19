@@ -1,40 +1,29 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const LegacyTicket = await ethers.getContractFactory("MirrorTicket");
-  const upperLevel = await LegacyTicket.deploy(
-    "0x2C68489f711eEf3e30fC0Cc20Bdaa436A3b4cc4a",
-    "Krause House Upper Level Ticket",
-    "KH"
-  );
-  const clubLevel = await LegacyTicket.deploy(
-    "0x2C68489f711eEf3e30fC0Cc20Bdaa436A3b4cc4a",
-    "Krause House Club Level Ticket",
-    "KH"
-  );
-  const courtside = await LegacyTicket.deploy(
-    "0x2C68489f711eEf3e30fC0Cc20Bdaa436A3b4cc4a",
-    "Krause House Courtside Ticket",
-    "KH"
-  );
-
-  await upperLevel.deployed();
-  await clubLevel.deployed();
-  await courtside.deployed();
-
-  console.log("Upper level deployed to:", upperLevel.address);
-  console.log("Club level deployed to:", clubLevel.address);
-  console.log("Courtside deployed to:", courtside.address);
-
   const V2Tickets = await ethers.getContractFactory("KrauseTickets");
   const krauseTicketsContract = await upgrades.deployProxy(V2Tickets, [
-    upperLevel.address,
-    clubLevel.address,
-    courtside.address,
+    "0xe13ac4eA901C8A30A219eb8842d1693c387c7a69",
+    "0x726CD6af96BC07a25606FfA227d81cff72b658c0",
+    "0x10304b3bF0529daDfb9c4E975F439e93B5618fB1",
     "",
   ]);
   await krauseTicketsContract.deployed();
   console.log("KrauseTickets deployed to:", krauseTicketsContract.address);
+
+  await krauseTicketsContract.setUri(
+    "https://ipfs.io/ipfs/QmRtwCrLUYUmiMSw9Xrd2mMPe5JWEo9X8s4hKsb8NRkZWF/"
+  );
+  await krauseTicketsContract.setContractURI(
+    "https://ipfs.io/ipfs/QmaWoMgxdpd9h7D1GAY38JBYpzftJbRWdxWDSMp8t5cVFt"
+  );
+  await krauseTicketsContract.setRoyaltyInfo(
+    "0xb2e19da274Cfc17110abca40114784D9822D4242",
+    500
+  );
+
+  console.log("Setup complete!");
+  // MANUAL: transfer ownership
 }
 
 main().catch((error) => {
