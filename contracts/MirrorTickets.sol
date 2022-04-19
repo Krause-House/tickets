@@ -112,4 +112,13 @@ contract MirrorTickets is ERC721, Ownable {
 
         _mint(to, tokenId);
     }
+
+    function burn(uint256 tokenId) public {
+        require(
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "ERC721: transfer caller is not owner nor approved"
+        );
+
+        _burn(tokenId);
+    }
 }

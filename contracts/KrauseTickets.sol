@@ -143,11 +143,11 @@ contract KrauseTickets is
         bytes calldata
     ) external returns (bytes4) {
         if (msg.sender == legacyUpperLevel) {
-            _exchangeUpperLevel(from);
+            _exchangeUpperLevel(from, tokenId);
         } else if (msg.sender == legacyClubLevel) {
-            _exchangeClubLevel(from);
+            _exchangeClubLevel(from, tokenId);
         } else if (msg.sender == legacyCourtside) {
-            _exchangeCourtside(from);
+            _exchangeCourtside(from, tokenId);
         } else {
             return this.onERC721Received.selector;
         }
@@ -158,20 +158,32 @@ contract KrauseTickets is
 
     /// @notice Mint an upper level ticket for user
     /// @param to The address to mint the ticket to
-    function _exchangeUpperLevel(address to) private {
+    function _exchangeUpperLevel(address to, uint256 tokenId) private {
         _mint(to, upperLevelId, 1, "");
+        (bool success, bytes memory data) = legacyUpperLevel.call(
+            abi.encodeWithSignature("burn(uint256)", tokenId)
+        );
+        require(success, "Failed to burn token");
     }
 
     /// @notice Mint a club level ticket for user
     /// @param to The address to mint the ticket to
-    function _exchangeClubLevel(address to) private {
+    function _exchangeClubLevel(address to, uint256 tokenId) private {
         _mint(to, clubLevelId, 1, "");
+        (bool success, bytes memory data) = legacyClubLevel.call(
+            abi.encodeWithSignature("burn(uint256)", tokenId)
+        );
+        require(success, "Failed to burn token");
     }
 
     /// @notice Mint a courtside ticket for user
     /// @param to The address to mint the ticket to
-    function _exchangeCourtside(address to) private {
+    function _exchangeCourtside(address to, uint256 tokenId) private {
         _mint(to, courtsideId, 1, "");
+        (bool success, bytes memory data) = legacyCourtside.call(
+            abi.encodeWithSignature("burn(uint256)", tokenId)
+        );
+        require(success, "Failed to burn token");
     }
 
     /// @notice Calculates royalty amount based on token's sale price
