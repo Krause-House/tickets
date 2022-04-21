@@ -2,7 +2,7 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-    "txHash": "0x9a99d507b121cfc0e46a2241ed69504861ff122bb79cc7f7e001f690131170cf"
+    "txHash": "0xf509bbf58d34affcb242f5fbfc751a6d54adf763f8666dad9d14678393a6be26"
   },
   "proxies": [
     {
@@ -101,11 +101,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0x70bDA08DBe07363968e9EE53d899dFE48560605B",
-      "txHash": "0x391a3ec2d93801224a67e7844db351c5da442bdd414e2bbcf09af0ea9e083d00",
-      "kind": "transparent"
-    },
-    {
       "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
       "txHash": "0xebc56e83b7bb2c6915fb4bb00b7437861986ae473d271956349fddc8d4854e5f",
       "kind": "transparent"
@@ -131,45 +126,50 @@
       "kind": "transparent"
     },
     {
+      "address": "0x70bDA08DBe07363968e9EE53d899dFE48560605B",
+      "txHash": "0x1b228e411173fd6aee6c9371f2f6dd215a209a72b470f8e19b1270cff1505d21",
+      "kind": "transparent"
+    },
+    {
       "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-      "txHash": "0x056b24b8294afb712b3b06507569b660ce54df87b656ed1fca0d293a2059db1c",
+      "txHash": "0x416a0619f5d0d9dbda7e515e3693459a9c164a09ce383d1e340a3f520e2e7392",
       "kind": "transparent"
     },
     {
       "address": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
-      "txHash": "0x8f4eeb360c5e4eed4143fd78005a1939b8799d2f89e39bfba84c26cb4edef221",
+      "txHash": "0x493c0211cca94041558ca2c8fe87d72df35fe519fb0b0104b240d0d229f25ffa",
       "kind": "transparent"
     },
     {
       "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
-      "txHash": "0xdbc8e03a006d246684e24900c601a6b2dcc8effce0553fb490788b81d422e55d",
+      "txHash": "0xa2fe5de0bb06d5570b91a40219332b209f323b8c706d11334b4de596d0e4a4c2",
       "kind": "transparent"
     },
     {
       "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
-      "txHash": "0xa55e21a50a32d8120c2401a0090fc1b04429a3062e7078a5532762ba22b93bc5",
+      "txHash": "0x2995d8733c4d52f1490f0ab4d36e6b717927990153857b24ea07c45a90e54c94",
       "kind": "transparent"
     },
     {
       "address": "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
-      "txHash": "0x55c1bce69d7bc119c591cf7b4626e36bf3dfd735fe7091880a938b4fec28c5d3",
+      "txHash": "0x6ccfb595016e84e1a58e6bb51c8643fb31cf894837e40634009eb5eb96f4e193",
       "kind": "transparent"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0x8faa5952fd7ee5223c863224ef99adabd9e6dddf7c4bf7d0c1d52bc58bfcbdc5",
+      "txHash": "0x427d807beb963cce3678f02d484ca3bc2bd42f6e1e04c46e11ae6f024058156a",
       "kind": "transparent"
     },
     {
       "address": "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
-      "txHash": "0xc35eb47abd41e5fd869e0b87a75d7e9c4db24d57e5ae9a23bee68cc5f7aeb3eb",
+      "txHash": "0x203cc6b91c92d61f27e2c309280bbb0cef2d1a5dc3a939d6df51e18578f0e602",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "c2cab2edb6d5e224e940730b65c15cd53a3240a95aa4326e106c22bad2a75f18": {
+    "77637ae3e72798f37b48a494cf4470e2acd3de1958d984ae25d5965798d725e9": {
       "address": "0xefAB0Beb0A557E452b398035eA964948c750b2Fd",
-      "txHash": "0xde4da95f77cf15ba39deae88d26dbb65d35209f53418a2bf6c6239665d50e46c",
+      "txHash": "0x6ac6ab18ff90ee2cc82ef85ca9480dd731b1da6d41602902c46cb52e141ce471",
       "layout": {
         "storage": [
           {
@@ -365,9 +365,9 @@
         }
       }
     },
-    "77637ae3e72798f37b48a494cf4470e2acd3de1958d984ae25d5965798d725e9": {
+    "131b08459880a82518ff6c0544481491370fe4cbd1fb97727f837b3628752a3a": {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x31fe4500f6d6d24d96bfab3daf368f1bdb9880d8d6d3297a2ceda0a054475b56",
+      "txHash": "0x62cb8fba035c549a703f0c54d9b80399126cc28c9c97fff9be14cbbc6fd62b28",
       "layout": {
         "storage": [
           {
@@ -483,36 +483,60 @@
             "src": "contracts/KrauseTickets.sol:35"
           },
           {
-            "label": "willCallTickets",
+            "label": "upperLevelEdition",
             "offset": 0,
             "slot": "205",
-            "type": "t_address",
+            "type": "t_uint256",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:41"
+            "src": "contracts/KrauseTickets.sol:38"
           },
           {
-            "label": "legacyTickets",
+            "label": "clubLevelEdition",
             "offset": 0,
             "slot": "206",
-            "type": "t_address",
+            "type": "t_uint256",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:42"
+            "src": "contracts/KrauseTickets.sol:40"
           },
           {
-            "label": "royaltyFeeInBips",
+            "label": "courtsideEdition",
             "offset": 0,
             "slot": "207",
             "type": "t_uint256",
             "contract": "KrauseTickets",
-            "src": "contracts/KrauseTickets.sol:44"
+            "src": "contracts/KrauseTickets.sol:42"
           },
           {
-            "label": "royaltyReceiver",
+            "label": "willCallTickets",
             "offset": 0,
             "slot": "208",
             "type": "t_address",
             "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:44"
+          },
+          {
+            "label": "legacyTickets",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_address",
+            "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:45"
+          },
+          {
+            "label": "royaltyFeeInBips",
+            "offset": 0,
+            "slot": "210",
+            "type": "t_uint256",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:47"
+          },
+          {
+            "label": "royaltyReceiver",
+            "offset": 0,
+            "slot": "211",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:48"
           }
         ],
         "types": {

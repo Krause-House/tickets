@@ -35,8 +35,11 @@ contract KrauseTickets is
     string public symbol;
 
     uint256 public constant upperLevelId = 0;
+    uint256 public upperLevelEdition;
     uint256 public constant clubLevelId = 1;
+    uint256 public clubLevelEdition;
     uint256 public constant courtsideId = 2;
+    uint256 public courtsideEdition;
 
     address public willCallTickets;
     address public legacyTickets;
@@ -55,6 +58,9 @@ contract KrauseTickets is
         royaltyReceiver = msg.sender;
         name = "Krause House Ticket";
         symbol = "KH";
+        upperLevelEdition = 61;
+        clubLevelEdition = 60;
+        courtsideEdition = 59;
         __ERC1155_init("");
         __Ownable_init();
         __SafetyLatchUpgradeable_init();
@@ -76,6 +82,17 @@ contract KrauseTickets is
         uint256 _amount
     ) external onlyOwner {
         _mint(_to, _id, _amount, "");
+    }
+
+    /// @notice set editions for legacy ticekts
+    function setEditions(
+        uint256 _upperLevel,
+        uint256 _clubLevel,
+        uint256 _courtside
+    ) external onlyOwner {
+        upperLevelEdition = _upperLevel;
+        clubLevelEdition = _clubLevel;
+        courtsideEdition = _courtside;
     }
 
     /// @notice Query if a contract implements an interface
@@ -165,11 +182,11 @@ contract KrauseTickets is
             abi.encodeWithSignature("tokenToEdition(uint256)", tokenId)
         );
         uint256 edition = abi.decode(data, (uint256));
-        if (success && edition == 61) {
+        if (success && edition == upperLevelEdition) {
             _mintUpperLevel(to);
-        } else if (success && edition == 60) {
+        } else if (success && edition == clubLevelEdition) {
             _mintClubLevel(to);
-        } else if (success && edition == 59) {
+        } else if (success && edition == courtsideEdition) {
             _mintCourtside(to);
         }
     }
