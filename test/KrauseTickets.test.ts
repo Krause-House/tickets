@@ -7,6 +7,8 @@ const ticketsAbi = [
   "function setUri(string memory _uri) public",
   "function setRoyaltyInfo(address _royaltyReceiver, uint256 _royaltyFeeInBips) external",
   "function supportsInterface(bytes4 interfaceID) public",
+  "function mint(address, uint256, uint256) external",
+  "function balanceOf(address, uint256) public view returns (uint256)",
 ];
 const willCallTicketsAbi = [
   "function approve(address spender, uint256 id) public",
@@ -52,6 +54,22 @@ describe("Exchange tickets", function () {
     await whenExchanging(alice, 1);
 
     assertExchanged(aliceAddress);
+  });
+
+  it("can mint additional tickets only if owner", async function () {
+    const aliceContract = givenKrauseTicketsContract(alice);
+
+    await expect(
+      aliceContract.mint(await bob.getAddress(), upperLevelId, 1)
+    ).to.be.revertedWith("Ownable: caller is not the owner");
+    expect(
+      await aliceContract.balanceOf(await bob.getAddress(), upperLevelId)
+    ).to.equal(0);
+
+    await krauseTickets.mint(await bob.getAddress(), upperLevelId, 1);
+    expect(
+      await krauseTickets.balanceOf(await bob.getAddress(), upperLevelId)
+    ).to.equal(1);
   });
 
   it("retrieves the correct uri for each token", async function () {
@@ -116,7 +134,6 @@ const givenTicketContract = (signer: Signer) => {
     signer
   );
 };
-
 const givenKrauseTicketsContract = (signer: Signer) => {
   return new ethers.Contract(krauseTickets.address, ticketsAbi, signer);
 };

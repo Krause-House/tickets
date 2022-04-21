@@ -69,6 +69,15 @@ contract KrauseTickets is
         symbol = _symbol;
     }
 
+    /// @notice mint more tickets to the address
+    function mint(
+        address _to,
+        uint256 _id,
+        uint256 _amount
+    ) external onlyOwner {
+        _mint(_to, _id, _amount, "");
+    }
+
     /// @notice Query if a contract implements an interface
     /// @param interfaceID The interface identifier, as specified in ERC-165
     /// @dev Interface identification is specified in ERC-165. This function
@@ -139,7 +148,7 @@ contract KrauseTickets is
         bytes calldata
     ) external returns (bytes4) {
         if (msg.sender == willCallTickets) {
-            _exchangeWillCall(from, tokenId);
+            _exchangeWillCall(from);
         } else if (msg.sender == legacyTickets) {
             _exchangeTicket(from, tokenId);
         } else {
@@ -157,39 +166,35 @@ contract KrauseTickets is
         );
         uint256 edition = abi.decode(data, (uint256));
         if (success && edition == 61) {
-            _mintUpperLevel(to, tokenId);
+            _mintUpperLevel(to);
         } else if (success && edition == 60) {
-            _mintClubLevel(to, tokenId);
+            _mintClubLevel(to);
         } else if (success && edition == 59) {
-            _mintCourtside(to, tokenId);
+            _mintCourtside(to);
         }
     }
 
     /// @notice Exchange a will call ticket (burns the legacy ticket)
     /// @param to The address to mint the ticket to
-    function _exchangeWillCall(address to, uint256 tokenId) private {
-        (bool success, bytes memory data) = willCallTickets.call(
-            abi.encodeWithSignature("burn(uint256)", tokenId)
-        );
-        require(success, "Failed to burn token");
-        _mintUpperLevel(to, tokenId);
+    function _exchangeWillCall(address to) private {
+        _mintUpperLevel(to);
     }
 
     /// @notice Mint an upper level ticket for user
     /// @param to The address to mint the ticket to
-    function _mintUpperLevel(address to, uint256 tokenId) private {
+    function _mintUpperLevel(address to) private {
         _mint(to, upperLevelId, 1, "");
     }
 
     /// @notice Mint a club level ticket for user
     /// @param to The address to mint the ticket to
-    function _mintClubLevel(address to, uint256 tokenId) private {
+    function _mintClubLevel(address to) private {
         _mint(to, clubLevelId, 1, "");
     }
 
     /// @notice Mint a courtside ticket for user
     /// @param to The address to mint the ticket to
-    function _mintCourtside(address to, uint256 tokenId) private {
+    function _mintCourtside(address to) private {
         _mint(to, courtsideId, 1, "");
     }
 
