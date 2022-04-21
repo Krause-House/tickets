@@ -35,26 +35,22 @@ contract KrauseTickets is
     string public symbol;
 
     uint256 public constant upperLevelId = 0;
-    address public legacyUpperLevel;
-
     uint256 public constant clubLevelId = 1;
-    address public legacyClubLevel;
-
     uint256 public constant courtsideId = 2;
-    address public legacyCourtside;
+
+    address public willCallTickets;
+    address public legacyTickets;
 
     uint256 public royaltyFeeInBips; // 1% = 100
     address public royaltyReceiver;
 
     function initialize(
-        address _legacyUpperLevel,
-        address _legacyClubLevel,
-        address _legacyCourtside,
+        address _willCallTickets,
+        address _legacyTickets,
         string memory _uri
     ) public initializer {
-        legacyUpperLevel = _legacyUpperLevel;
-        legacyClubLevel = _legacyClubLevel;
-        legacyCourtside = _legacyCourtside;
+        willCallTickets = _willCallTickets;
+        legacyTickets = _legacyTickets;
         baseUri = _uri;
         royaltyReceiver = msg.sender;
         name = "Krause House Ticket";
@@ -142,48 +138,59 @@ contract KrauseTickets is
         uint256 tokenId,
         bytes calldata
     ) external returns (bytes4) {
-        if (msg.sender == legacyUpperLevel) {
-            _exchangeUpperLevel(from, tokenId);
-        } else if (msg.sender == legacyClubLevel) {
-            _exchangeClubLevel(from, tokenId);
-        } else if (msg.sender == legacyCourtside) {
-            _exchangeCourtside(from, tokenId);
+        if (msg.sender == willCallTickets) {
+            _exchangeWillCall(from, tokenId);
+        } else if (msg.sender == legacyTickets) {
+            _exchangeTicket(from, tokenId);
         } else {
             return this.onERC721Received.selector;
         }
-
         emit Exchanged(from, tokenId, msg.sender);
         return this.onERC721Received.selector;
     }
 
-    /// @notice Mint an upper level ticket for user
+    /// @notice Exchange a ticket (burns the legacy ticket)
     /// @param to The address to mint the ticket to
-    function _exchangeUpperLevel(address to, uint256 tokenId) private {
-        _mint(to, upperLevelId, 1, "");
-        (bool success, bytes memory data) = legacyUpperLevel.call(
+    function _exchangeTicket(address to, uint256 tokenId) private {
+        (bool success, bytes memory data) = legacyTickets.call(
+            abi.encodeWithSignature("tokenToEdition(uint256)", tokenId)
+        );
+        uint256 edition = abi.decode(data, (uint256));
+        if (success && edition == 61) {
+            _mintUpperLevel(to, tokenId);
+        } else if (success && edition == 60) {
+            _mintClubLevel(to, tokenId);
+        } else if (success && edition == 59) {
+            _mintCourtside(to, tokenId);
+        }
+    }
+
+    /// @notice Exchange a will call ticket (burns the legacy ticket)
+    /// @param to The address to mint the ticket to
+    function _exchangeWillCall(address to, uint256 tokenId) private {
+        (bool success, bytes memory data) = willCallTickets.call(
             abi.encodeWithSignature("burn(uint256)", tokenId)
         );
         require(success, "Failed to burn token");
+        _mintUpperLevel(to, tokenId);
+    }
+
+    /// @notice Mint an upper level ticket for user
+    /// @param to The address to mint the ticket to
+    function _mintUpperLevel(address to, uint256 tokenId) private {
+        _mint(to, upperLevelId, 1, "");
     }
 
     /// @notice Mint a club level ticket for user
     /// @param to The address to mint the ticket to
-    function _exchangeClubLevel(address to, uint256 tokenId) private {
+    function _mintClubLevel(address to, uint256 tokenId) private {
         _mint(to, clubLevelId, 1, "");
-        (bool success, bytes memory data) = legacyClubLevel.call(
-            abi.encodeWithSignature("burn(uint256)", tokenId)
-        );
-        require(success, "Failed to burn token");
     }
 
     /// @notice Mint a courtside ticket for user
     /// @param to The address to mint the ticket to
-    function _exchangeCourtside(address to, uint256 tokenId) private {
+    function _mintCourtside(address to, uint256 tokenId) private {
         _mint(to, courtsideId, 1, "");
-        (bool success, bytes memory data) = legacyCourtside.call(
-            abi.encodeWithSignature("burn(uint256)", tokenId)
-        );
-        require(success, "Failed to burn token");
     }
 
     /// @notice Calculates royalty amount based on token's sale price

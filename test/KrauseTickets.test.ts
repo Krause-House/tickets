@@ -1,22 +1,27 @@
 import { expect } from "chai";
 import { Contract, Signer } from "ethers";
 import { ethers, upgrades } from "hardhat";
-import { MirrorTickets } from "../typechain";
+import { MirrorTickets, MirrorTicketEditions } from "../typechain";
 
 const ticketsAbi = [
   "function setUri(string memory _uri) public",
   "function setRoyaltyInfo(address _royaltyReceiver, uint256 _royaltyFeeInBips) external",
   "function supportsInterface(bytes4 interfaceID) public",
 ];
-const legacyTicketsAbi = [
+const willCallTicketsAbi = [
   "function approve(address spender, uint256 id) public",
   "function safeTransferFrom(address from,address to,uint256 tokenId) public",
 ];
+const legacyTicketsAbi = [
+  "function approve(address spender, uint256 id) public",
+  "function safeTransferFrom(address from,address to,uint256 tokenId) public",
+  "function setEdition(uint256 _edition) public",
+  "function tokenToEdition(uint256) public view returns (uint256)",
+];
 
 let legacyTickets: {
-  upperLevel: MirrorTickets;
-  clubLevel: MirrorTickets;
-  courtside: MirrorTickets;
+  willCall: MirrorTickets;
+  legacy: MirrorTicketEditions;
 };
 let upperLevelId: number, clubLevelId: number, courtsideId: number;
 let owner: Signer, alice: Signer, bob: Signer;
@@ -30,9 +35,8 @@ describe("Exchange tickets", function () {
 
     const KrauseTickets = await ethers.getContractFactory("KrauseTickets");
     krauseTickets = await upgrades.deployProxy(KrauseTickets, [
-      legacyTickets.upperLevel.address,
-      legacyTickets.clubLevel.address,
-      legacyTickets.courtside.address,
+      legacyTickets.willCall.address,
+      legacyTickets.legacy.address,
       uri,
     ]);
 
@@ -41,7 +45,7 @@ describe("Exchange tickets", function () {
     courtsideId = await (await krauseTickets.courtsideId()).toNumber();
   });
 
-  it("allows holders to exchange ticket", async function () {
+  it("allows holders to exchange tickets", async function () {
     const aliceAddress = await alice.getAddress();
     await givenLegacyTickets(aliceAddress, 1);
 
@@ -98,23 +102,16 @@ describe("Exchange tickets", function () {
   });
 });
 
-const givenUpperLevelContract = (signer: Signer) => {
+const givenWillCallContract = (signer: Signer) => {
   return new ethers.Contract(
-    legacyTickets.upperLevel.address,
-    legacyTicketsAbi,
+    legacyTickets.willCall.address,
+    willCallTicketsAbi,
     signer
   );
 };
-const givenClubLevelContract = (signer: Signer) => {
+const givenTicketContract = (signer: Signer) => {
   return new ethers.Contract(
-    legacyTickets.clubLevel.address,
-    legacyTicketsAbi,
-    signer
-  );
-};
-const givenCourtsideContract = (signer: Signer) => {
-  return new ethers.Contract(
-    legacyTickets.courtside.address,
+    legacyTickets.legacy.address,
     legacyTicketsAbi,
     signer
   );
@@ -124,54 +121,75 @@ const givenKrauseTicketsContract = (signer: Signer) => {
   return new ethers.Contract(krauseTickets.address, ticketsAbi, signer);
 };
 
-const givenLegacyTickets = async (accountAddress: string, tokenId: number) => {
-  await legacyTickets.upperLevel.mint(accountAddress, tokenId);
-  expect(await legacyTickets.upperLevel.balanceOf(accountAddress)).to.equal(1);
-  await legacyTickets.clubLevel.mint(accountAddress, tokenId);
-  expect(await legacyTickets.clubLevel.balanceOf(accountAddress)).to.equal(1);
-  await legacyTickets.courtside.mint(accountAddress, tokenId);
-  expect(await legacyTickets.courtside.balanceOf(accountAddress)).to.equal(1);
+const givenLegacyTickets = async (
+  accountAddress: string,
+  startingTokenId: number
+) => {
+  await legacyTickets.willCall.mint(accountAddress, startingTokenId);
+  expect(await legacyTickets.willCall.balanceOf(accountAddress)).to.equal(1);
+  await legacyTickets.legacy.mint(accountAddress, startingTokenId);
+  expect(await legacyTickets.legacy.balanceOf(accountAddress)).to.equal(1);
+  await legacyTickets.legacy.mint(accountAddress, startingTokenId + 1);
+  expect(await legacyTickets.legacy.balanceOf(accountAddress)).to.equal(2);
+  await legacyTickets.legacy.mint(accountAddress, startingTokenId + 2);
+  expect(await legacyTickets.legacy.balanceOf(accountAddress)).to.equal(3);
 };
 
-const whenExchanging = async (signer: Signer, tokenId: number) => {
-  await givenUpperLevelContract(signer).safeTransferFrom(
+const whenExchanging = async (signer: Signer, startingTokenId: number) => {
+  await givenWillCallContract(signer).safeTransferFrom(
     await signer.getAddress(),
     krauseTickets.address,
-    tokenId
+    startingTokenId
   );
-  await givenClubLevelContract(signer).safeTransferFrom(
+  const legacyTickets = givenTicketContract(signer);
+  await legacyTickets.setEdition(59); // courtside
+  await legacyTickets.safeTransferFrom(
     await signer.getAddress(),
     krauseTickets.address,
-    tokenId
+    startingTokenId
   );
-  await givenCourtsideContract(signer).safeTransferFrom(
+  console.log("Thing");
+
+  await legacyTickets.setEdition(60); // club level
+  await legacyTickets.safeTransferFrom(
     await signer.getAddress(),
     krauseTickets.address,
-    tokenId
+    startingTokenId + 1
+  );
+
+  await legacyTickets.setEdition(61); // upper level
+  await legacyTickets.safeTransferFrom(
+    await signer.getAddress(),
+    krauseTickets.address,
+    startingTokenId + 2
   );
 };
 
 const deployLegacyTickets = async (owner: string) => {
-  const LegacyTicket = await ethers.getContractFactory("MirrorTickets");
-  const upperLevel = await LegacyTicket.deploy(owner, "", "");
-  const clubLevel = await LegacyTicket.deploy(owner, "", "");
-  const courtside = await LegacyTicket.deploy(owner, "", "");
+  const WillCallTicket = await ethers.getContractFactory("MirrorTickets");
+  const willCall = await WillCallTicket.deploy(owner, "", "");
+  const LegacyTicket = await ethers.getContractFactory("MirrorTicketEditions");
+  const legacy = await LegacyTicket.deploy(owner, "", "");
 
-  await upperLevel.deployed();
-  await clubLevel.deployed();
-  await courtside.deployed();
-  return { upperLevel, clubLevel, courtside };
+  await willCall.deployed();
+  await legacy.deployed();
+  return { willCall, legacy };
 };
 
 const assertExchanged = async (address: string) => {
-  assertV2TicketsHeld(address, 1);
-  expect(await legacyTickets.upperLevel.balanceOf(address)).to.equal(0);
-  expect(await legacyTickets.clubLevel.balanceOf(address)).to.equal(0);
-  expect(await legacyTickets.courtside.balanceOf(address)).to.equal(0);
+  assertV2TicketsHeld(address, [2, 1, 1]);
+  expect(await legacyTickets.willCall.balanceOf(address)).to.equal(0);
+  expect(await legacyTickets.legacy.balanceOf(address)).to.equal(0);
 };
 
-const assertV2TicketsHeld = async (address: string, count: number) => {
-  expect(await krauseTickets.balanceOf(address, upperLevelId)).to.equal(count);
-  expect(await krauseTickets.balanceOf(address, clubLevelId)).to.equal(count);
-  expect(await krauseTickets.balanceOf(address, courtsideId)).to.equal(count);
+const assertV2TicketsHeld = async (address: string, count: number[]) => {
+  expect(await krauseTickets.balanceOf(address, upperLevelId)).to.equal(
+    count[0]
+  );
+  expect(await krauseTickets.balanceOf(address, clubLevelId)).to.equal(
+    count[1]
+  );
+  expect(await krauseTickets.balanceOf(address, courtsideId)).to.equal(
+    count[2]
+  );
 };

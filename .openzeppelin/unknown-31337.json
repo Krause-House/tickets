@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0x631e691c8074a7f486f282656d54b75959e5829726e0e029c82fec8c73095ef0"
+    "address": "0x26B862f640357268Bd2d9E95bc81553a2Aa81D7E",
+    "txHash": "0xcd98fe373c7b1849711f37f559d0dc9536e7cb3419284a14df1c7d1ab9b18202"
   },
   "proxies": [
     {
@@ -43,6 +43,36 @@
     {
       "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
       "txHash": "0x00dc02a03077708adb9d2170a52ed69ad3ecab4beea1984c9def831d918004b4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xA56F946D6398Dd7d9D4D9B337Cf9E0F68982ca5B",
+      "txHash": "0xe9ea6a9f34a5f6e0f77076416079940778bf26411d3efbaf1f573ae8cb90554a",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x2b5A4e5493d4a54E717057B127cf0C000C876f9B",
+      "txHash": "0xfcb951f97b0f63d360e1ec8205aaafffc7160b899d1063ac7d14523bffb1ca0d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x821f3361D454cc98b7555221A06Be563a7E2E0A6",
+      "txHash": "0x493a7ce6699d9bfa270688d5804ccf648ad6460ac72253dcb5f45521396625b1",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x8F4ec854Dd12F1fe79500a1f53D0cbB30f9b6134",
+      "txHash": "0xd7dfd0b2a51b9e85108e1d8b963e154fed86aa5a6a01c3655ebe9a6f84db5018",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xaC47e91215fb80462139756f43438402998E4A3a",
+      "txHash": "0x2d4a48540b5b215ee686c737c03c9e0110213342b2e411e51f4b8b42088bc984",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xaC9fCBA56E42d5960f813B9D0387F3D3bC003338",
+      "txHash": "0x82bb36b1ab1884ee248508ae4bdecfc0828b1d71fb3ec0f1e8ca823cd6366be6",
       "kind": "transparent"
     }
   ],
@@ -409,6 +439,204 @@
             "type": "t_address",
             "contract": "KrauseTickets",
             "src": "contracts/KrauseTickets.sol:47"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]",
+            "numberOfBytes": "1504"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "c2cab2edb6d5e224e940730b65c15cd53a3240a95aa4326e106c22bad2a75f18": {
+      "address": "0x70bDA08DBe07363968e9EE53d899dFE48560605B",
+      "txHash": "0x9076ce0bdfe027ec8585475588a5698f5b0f957c0b87c37e38b0388b94802869",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_balances",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:25"
+          },
+          {
+            "label": "_operatorApprovals",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:28"
+          },
+          {
+            "label": "_uri",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_string_storage",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:31"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_array(t_uint256)47_storage",
+            "contract": "ERC1155Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol:475"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
+          },
+          {
+            "label": "baseUri",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:32"
+          },
+          {
+            "label": "contractURI",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:33"
+          },
+          {
+            "label": "name",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:34"
+          },
+          {
+            "label": "symbol",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_string_storage",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:35"
+          },
+          {
+            "label": "willCallTickets",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:41"
+          },
+          {
+            "label": "legacyTickets",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:42"
+          },
+          {
+            "label": "royaltyFeeInBips",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_uint256",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:44"
+          },
+          {
+            "label": "royaltyReceiver",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_address",
+            "contract": "KrauseTickets",
+            "src": "contracts/KrauseTickets.sol:45"
           }
         ],
         "types": {

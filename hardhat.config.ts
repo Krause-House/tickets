@@ -24,6 +24,11 @@ const config: HardhatUserConfig = {
   solidity: "0.8.13",
   defaultNetwork: "hardhat",
   networks: {
+    hardhat: {
+      forking: {
+        url: process.env.MAINNET_URL ?? "",
+      },
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:
