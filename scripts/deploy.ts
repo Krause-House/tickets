@@ -3,9 +3,8 @@ import { ethers, upgrades } from "hardhat";
 async function main() {
   const V2Tickets = await ethers.getContractFactory("KrauseTickets");
   const krauseTicketsContract = await upgrades.deployProxy(V2Tickets, [
-    "0xe13ac4eA901C8A30A219eb8842d1693c387c7a69",
-    "0x726CD6af96BC07a25606FfA227d81cff72b658c0",
-    "0x10304b3bF0529daDfb9c4E975F439e93B5618fB1",
+    "0x6F1183aB121e9F05CA4916237012Ed37B6f20583", // THESE ARE THE MAINNET ADDRESSES
+    "0xC4E0f3Ec24972C75dF7c716922096F4270b7bB4e",
     "",
   ]);
   await krauseTicketsContract.deployed();
@@ -23,7 +22,6 @@ async function main() {
   );
 
   console.log("Setup complete!");
-  // MANUAL: transfer ownership
 }
 
 main().catch((error) => {

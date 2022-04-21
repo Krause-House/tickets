@@ -148,7 +148,6 @@ const whenExchanging = async (signer: Signer, startingTokenId: number) => {
     krauseTickets.address,
     startingTokenId
   );
-  console.log("Thing");
 
   await legacyTickets.setEdition(60); // club level
   await legacyTickets.safeTransferFrom(
