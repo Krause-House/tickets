@@ -14,10 +14,10 @@ async function main() {
     "https://ipfs.io/ipfs/QmRtwCrLUYUmiMSw9Xrd2mMPe5JWEo9X8s4hKsb8NRkZWF/"
   );
   await krauseTicketsContract.setContractURI(
-    "https://ipfs.io/ipfs/QmaWoMgxdpd9h7D1GAY38JBYpzftJbRWdxWDSMp8t5cVFt"
+    "https://gateway.pinata.cloud/ipfs/QmfWTJPp173RT15YoEmRJUBJbGGigocgyLFiH8upWV8w7z"
   );
   await krauseTicketsContract.setRoyaltyInfo(
-    "0xb2e19da274Cfc17110abca40114784D9822D4242",
+    "0xe4762eacebdb7585d32079fdcba5bb94eb5d76f2",
     500
   );
 

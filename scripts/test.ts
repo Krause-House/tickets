@@ -15,6 +15,7 @@ const willCallTicketsAbi = [
 ];
 const legacyTicketsAbi = [
   "function approve(address spender, uint256 id) public",
+  "function balanceOf(address) view returns (uint256)",
   "function safeTransferFrom(address from,address to,uint256 tokenId) public",
   "function setEdition(uint256 _edition) public",
   "function tokenToEdition(uint256) public view returns (uint256)",
@@ -52,15 +53,9 @@ const test = async () => {
   console.log(
     await krauseTickets.balanceOf(await owner.getAddress(), upperLevelId)
   );
-  console.log(
-    await provider.getBalance("0x2C68489f711eEf3e30fC0Cc20Bdaa436A3b4cc4a")
-  );
+  console.log(await provider.getBalance(owner.getAddress()));
 
-  const legacy = new ethers.Contract(
-    willCallTickets,
-    willCallTicketsAbi,
-    owner
-  );
+  const legacy = new ethers.Contract(legacyTickets, legacyTicketsAbi, owner);
 
   console.log(
     "Will call ticket:",
@@ -74,7 +69,7 @@ const test = async () => {
   const txn = await legacy.safeTransferFrom(
     await owner.getAddress(),
     krauseTickets.address,
-    84
+    2583
   );
 
   console.log(
