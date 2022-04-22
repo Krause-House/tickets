@@ -33,12 +33,6 @@ const test = async () => {
   let provider = ethers.getDefaultProvider("http://127.0.0.1:8545/");
   owner = new ethers.Wallet(process.env.PRIVATE_KEY ?? "", provider);
 
-  //   const KrauseTickets = await ethers.getContractFactory("KrauseTickets");
-  //   krauseTickets = await upgrades.deployProxy(KrauseTickets, [
-  //     willCallTickets,
-  //     legacyTickets,
-  //     uri,
-  //   ]);
   krauseTickets = new ethers.Contract(
     "0x70bDA08DBe07363968e9EE53d899dFE48560605B",
     ticketsAbi,

@@ -11,10 +11,10 @@ async function main() {
   console.log("KrauseTickets deployed to:", krauseTicketsContract.address);
 
   await krauseTicketsContract.setUri(
-    "https://ipfs.io/ipfs/QmRtwCrLUYUmiMSw9Xrd2mMPe5JWEo9X8s4hKsb8NRkZWF/"
+    "https://gateway.pinata.cloud/ipfs/QmVGYouVCfxpsJKrecrNFmbeqom98Ybhrz5yL7K3kiVRMo/"
   );
   await krauseTicketsContract.setContractURI(
-    "https://gateway.pinata.cloud/ipfs/QmfWTJPp173RT15YoEmRJUBJbGGigocgyLFiH8upWV8w7z"
+    "https://gateway.pinata.cloud/ipfs/QmfWTJPp173RT15YoEmRJUBJbGGigocgyLFiH8upWV8w7z/"
   );
   await krauseTicketsContract.setRoyaltyInfo(
     "0xe4762eacebdb7585d32079fdcba5bb94eb5d76f2",
